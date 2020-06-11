@@ -1,10 +1,10 @@
-package main
+package greetings
 
 import "testing"
 
 func TestHello(t *testing.T) {
 	// test for empty argument
-	var emptyName string = greetings("")
+	var emptyName string = Greet("")
 
 	if emptyName != "Hello Dude!" {
 		t.Errorf("greetings(\"\") failed, expected %v, got %v", "Hello Dude!", emptyName)
@@ -14,7 +14,7 @@ func TestHello(t *testing.T) {
 	}
 
 	// test for a valid argument
-	var name string = greetings("Pigi")
+	var name string = Greet("Pigi")
 
 	if name != "Hello Pigi!" {
 		t.Errorf("greetings(\"Pigi\") failed, expected %v, got %v", "Hello Pigi!", name)
