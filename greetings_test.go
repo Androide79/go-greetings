@@ -74,3 +74,7 @@ func TestGetSimpleGreet(t *testing.T) {
 		t.Logf("getSimpleGreet(\"es\") success, expected \"Hola, amigo!\", got %v", esResult)
 	}
 }
+
+func TestGetGreetWithName(t *testing.T) {
+
+}
