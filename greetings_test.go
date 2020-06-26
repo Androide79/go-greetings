@@ -1,8 +1,11 @@
 package greetings
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
+
+	"github.com/Pallinder/go-randomdata"
 )
 
 func TestGreet(t *testing.T) {
@@ -13,6 +16,7 @@ func TestGetSimpleGreet(t *testing.T) {
 
 	var langNotPresent string = "kr"
 	var defaultValue string = "Hello Dude!"
+
 	//Get random known languange
 	var lang = []string{"it", "de", "fr", "es"}
 	var rndLangIndex int = rand.Int() % len(lang)
@@ -77,4 +81,60 @@ func TestGetSimpleGreet(t *testing.T) {
 
 func TestGetGreetWithName(t *testing.T) {
 
+	// test 'getGreetWithName' returns default value with a language not presents in language's array
+	var langNotPresent string = "kr"
+	var rndName = randomdata.FirstName(randomdata.RandomGender)
+	var defaultResult = fmt.Sprintf("Hello %v!", rndName)
+	var getGreetWithNameResult = getGreetWithName(rndName, langNotPresent)
+
+	if getGreetWithNameResult != defaultResult {
+		t.Errorf("getGreetWithName(\"%v\", \"%v\") failed, expected %v, got %v", rndName, langNotPresent, defaultResult, getGreetWithNameResult)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("getGreetWithName(\"%v\", \"%v\") success, expected %v, got %v", rndName, langNotPresent, defaultResult, getGreetWithNameResult)
+	}
+
+	// test 'getGreetWithName' returns 'Ciao <name_passed>!' if passed language is 'it'
+	var itResult string = getGreetWithName(rndName, "it")
+	var itExpectedResult string = fmt.Sprintf("Ciao %v!", rndName)
+
+	if itResult != itExpectedResult {
+		t.Errorf("getGreetWithName(\"%v\", \"it\") failed, expected %v, got %v", rndName, itExpectedResult, itResult)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("getGreetWithName(\"%v\", \"it\") success, expected \"%v\", got %v", rndName, itExpectedResult, itResult)
+	}
+
+	// test 'getGreetWithName' returns 'Bonjour <name_passed>!' if passed language is 'fr'
+	var frResult string = getGreetWithName(rndName, "fr")
+	var frExpectedResult string = fmt.Sprintf("Bonjour %v!", rndName)
+
+	if frResult != frExpectedResult {
+		t.Errorf("getGreetWithName(\"%v\", \"fr\") failed, expected %v, got %v", rndName, frExpectedResult, frResult)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("getGreetWithName(\"%v\", \"fr\") success, expected \"%v\", got %v", rndName, frExpectedResult, frResult)
+	}
+
+	// test 'getGreetWithName' returns 'Hallo <name_passed>!' if passed language is 'de'
+	var deResult string = getGreetWithName(rndName, "de")
+	var deExpectedResult string = fmt.Sprintf("Hallo %v!", rndName)
+
+	if deResult != deExpectedResult {
+		t.Errorf("getGreetWithName(\"%v\", \"de\") failed, expected %v, got %v", rndName, deExpectedResult, deResult)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("getGreetWithName(\"%v\", \"de\") success, expected \"%v\", got %v", rndName, deExpectedResult, deResult)
+	}
+
+	// test 'getGreetWithName' returns 'Hola <name_passed>!' if passed language is 'es'
+	var esResult string = getGreetWithName(rndName, "es")
+	var esExpectedResult string = fmt.Sprintf("Hola %v!", rndName)
+
+	if esResult != esExpectedResult {
+		t.Errorf("getGreetWithName(\"%v\", \"es\") failed, expected %v, got %v", rndName, esExpectedResult, esResult)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("getGreetWithName(\"%v\", \"es\") success, expected \"%v\", got %v", rndName, esExpectedResult, esResult)
+	}
 }
