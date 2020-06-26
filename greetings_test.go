@@ -9,7 +9,34 @@ import (
 )
 
 func TestGreet(t *testing.T) {
+	//Get random known languange
+	var lang = []string{"it", "de", "fr", "es"}
+	var rndLangIndex int = rand.Int() % len(lang)
+	var rndLang string = lang[rndLangIndex]
 
+	// test 'TestGreet' return a simple greet if passed name is ''
+	var emptyName string = ""
+	var greetResultWithEmptyName string = Greet(emptyName, rndLang)
+	var expectedResultEmpty string = getSimpleGreet(rndLang)
+
+	if greetResultWithEmptyName != expectedResultEmpty {
+		t.Errorf("Greet(\"%v\", \"%v\") failed, expected %v, got %v", emptyName, rndLang, expectedResultEmpty, greetResultWithEmptyName)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("Greet(\"%v\", \"%v\") success, expected %v, got %v", emptyName, rndLang, expectedResultEmpty, greetResultWithEmptyName)
+	}
+
+	// test 'TestGreet' return a greet with name if a name is passed
+	var rndName string = randomdata.FirstName(randomdata.RandomGender)
+	var greetResultWithRandomName string = Greet(rndName, rndLang)
+	var expectedResultWithRandomName string = getGreetWithName(rndName, rndLang)
+
+	if greetResultWithRandomName != expectedResultWithRandomName {
+		t.Errorf("Greet(\"%v\", \"%v\") failed, expected %v, got %v", rndName, rndLang, expectedResultWithRandomName, greetResultWithRandomName)
+	} else {
+		// log test success only if you use verbose test argument
+		t.Logf("Greet(\"%v\", \"%v\") success, expected %v, got %v", rndName, rndLang, expectedResultWithRandomName, greetResultWithRandomName)
+	}
 }
 
 func TestGetSimpleGreet(t *testing.T) {
@@ -83,9 +110,9 @@ func TestGetGreetWithName(t *testing.T) {
 
 	// test 'getGreetWithName' returns default value with a language not presents in language's array
 	var langNotPresent string = "kr"
-	var rndName = randomdata.FirstName(randomdata.RandomGender)
-	var defaultResult = fmt.Sprintf("Hello %v!", rndName)
-	var getGreetWithNameResult = getGreetWithName(rndName, langNotPresent)
+	var rndName string = randomdata.FirstName(randomdata.RandomGender)
+	var defaultResult string = fmt.Sprintf("Hello %v!", rndName)
+	var getGreetWithNameResult string = getGreetWithName(rndName, langNotPresent)
 
 	if getGreetWithNameResult != defaultResult {
 		t.Errorf("getGreetWithName(\"%v\", \"%v\") failed, expected %v, got %v", rndName, langNotPresent, defaultResult, getGreetWithNameResult)
